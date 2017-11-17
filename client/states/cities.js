@@ -70,7 +70,7 @@ const search_success_handler = (state, payload) => {
 const search_failure_handler = (state, payload) => {
   return {
     ...state,
-    err: payload,
+    err: [...state.err, payload],
     live_search_cities_loaded: true,
   }
 }
@@ -79,12 +79,16 @@ const search_failure_handler = (state, payload) => {
 
 const add_success_handler = (state, payload) => {
   const city = state.selected_cities.filter(item => item.id === payload.id)
-  if (city.length) return state
-  return { ...state, selected_cities: [...state.selected_cities, payload] }
+  if (city.length) return { ...state, live_search_cities: [] }
+  return {
+    ...state,
+    selected_cities: [...state.selected_cities, payload],
+    live_search_cities: [],
+  }
 }
 
 const add_failure_handler = (state, payload) => (
-  { ...state, err: payload }
+  { ...state, err: [...state.err, payload] }
 )
 
 //  Remove handlers
@@ -107,7 +111,7 @@ const find_success_handler = (state, payload) => (
 )
 
 const find_failure_handler = (state, payload) => (
-  { ...state, err: payload, local_cities_loaded: true }
+  { ...state, err: [...state.err, payload], local_cities_loaded: true }
 )
 
 //  Refresh handlers
