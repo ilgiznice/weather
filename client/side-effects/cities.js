@@ -80,7 +80,7 @@ function* actionSearchCity(action) {
 function* actionGetCity(action) {
   try {
     const city = yield call(getCity, action.payload.id)
-    yield put(add.success({ ...city.body, local: action.payload.local }))
+    yield put(add.success({ ...city.body, local: action.payload.local, loaded: true }))
   } catch (err) {
     yield put(add.failure(err))
   }
