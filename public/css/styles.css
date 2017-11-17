@@ -1,0 +1,44 @@
+.loader {
+  border: 16px solid #f3f3f3;
+  /* Light grey */
+  border-top: 16px solid #3498db;
+  /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+.live-search .result {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer; }
+.city {
+  border: 1px solid #eee;
+  padding: 5px; }
+  .city .name {
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer; }
+  .city .temp, .city .wind {
+    font-size: 18px; }
+  .city .action {
+    height: 50%;
+    cursor: pointer; }
+  .city .my-city {
+    color: rgba(50, 200, 50, 0.7); }
+.main .notification {
+  background-color: #f8e09f; }
+
+.main .result {
+  cursor: pointer;
+  font-size: 18px;
+  padding: 2px;
+  border: 1px solid #eee; }
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc3Mvc3R5bGVzLmNzcyIsInNvdXJjZVJvb3QiOiIifQ==*/

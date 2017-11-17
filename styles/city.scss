@@ -1,0 +1,19 @@
+.city {
+  border: 1px solid #eee;
+  padding: 5px;
+  .name {
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .temp, .wind {
+    font-size: 18px;
+  }
+  .action {
+    height: 50%;
+    cursor: pointer;
+  }
+  .my-city {
+    color: rgba(50, 200, 50, 0.7);
+  }
+}

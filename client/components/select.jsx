@@ -2,19 +2,25 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { search, add } from '../states/cities'
+import Loader from './loader.jsx'
+
+import '../../styles/live-search.scss'
 
 const Select = ({ cities, loaded, search, add }) => (
-  <div className="row">
-    <div className="form-group">
-      <input
-        type="text"
-        className="form-control"
-        placeholder="Введите город"
-        onChange={(e) => {
-          const name = e.target.value
-          if (name.length >= 3) search(name)
-        }}
-      />
+  <div className="row live-search">
+    <div className="col-xs-12 col-sm-12">
+      <div className="form-group">
+        <input
+          type="text"
+          id="live-search"
+          className="form-control"
+          placeholder="Введите город"
+          onChange={(e) => {
+            const name = e.target.value
+            if (name.length >= 3) search(name)
+          }}
+        />
+      </div>
     </div>
     <div>
       {
@@ -22,8 +28,13 @@ const Select = ({ cities, loaded, search, add }) => (
           ?
           cities.map(city => (
             <div
-              className="col-xs-12"
-              onClick={() => add(city.id)}
+              className="col-xs-12 col-sm-12 result"
+              role="button"
+              tabIndex="0"
+              onClick={() => {
+                document.getElementById('live-search').value = ''
+                add(city.id)
+              }}
             >
               {city.name}
               &nbsp;
@@ -31,7 +42,7 @@ const Select = ({ cities, loaded, search, add }) => (
             </div>
           ))
           :
-          <span>LOADER</span>
+          <Loader />
       }
     </div>
   </div>
