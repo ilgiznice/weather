@@ -53,11 +53,18 @@ const searchCity = (name) => {
     .sort((a, b) => {
       const city_a = a.name.toUpperCase()
       const city_b = b.name.toUpperCase()
-      if (city_a > city_b) return 1
-      if (city_a < city_b) return -1
-      return 0
+      if (city_a === name.toUpperCase()) return -1
+      if (city_b === name.toUpperCase()) return 1
+      return a.length - b.length || city_a < city_b
     })
     .slice(0, 5)
+    .sort((a, b) => {
+      const country_a = a.country.toUpperCase()
+      const country_b = b.country.toUpperCase()
+      if (country_a === country_b) return 0
+      if (country_a === 'RU') return -1
+      if (country_b === 'RU') return 1
+    })
     .map(item => (
       {
         id: item.id,
@@ -69,9 +76,9 @@ const searchCity = (name) => {
 
 /**
  * Поиск города по заданным координатам
- * @param {Number} lat 
- * @param {Number} lon 
- * @param {Number} accuracy 
+ * @param {Number} lat
+ * @param {Number} lon
+ * @param {Number} accuracy
  * @see /api/find?lat=LAT&lon=LON&accuracy=ACCURACY
  * @return {Array} cities
  */
