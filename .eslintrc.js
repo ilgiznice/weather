@@ -13,6 +13,7 @@ module.exports = {
         "camelcase": [0, { properties: 'never' }],
         "import/extensions": [0, "never"],
         "import/prefer-default-export": "off",
-        "jsx-a11y/click-events-have-key-events": "off"
+        "jsx-a11y/click-events-have-key-events": "off",
+        "no-underscore-dangle": "off"
     }
 };
