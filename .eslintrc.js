@@ -14,6 +14,7 @@ module.exports = {
         "import/extensions": [0, "never"],
         "import/prefer-default-export": "off",
         "jsx-a11y/click-events-have-key-events": "off",
-        "no-underscore-dangle": "off"
+        "no-underscore-dangle": "off",
+        "react/prop-types": "off"
     }
 };
