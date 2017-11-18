@@ -18,6 +18,8 @@
   padding-bottom: 3px;
   border-bottom: 1px solid #ddd;
   cursor: pointer; }
+.actions .btn {
+  cursor: pointer; }
 .city {
   border: 1px solid #eee;
   padding: 5px; }
