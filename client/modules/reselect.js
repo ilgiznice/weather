@@ -12,6 +12,7 @@ export const shortCityInfo = createSelector(
         name: city.name,
         temp: city.main.temp,
         wind: city.wind.speed,
+        icon: city.weather[0].icon,
         loaded: city.loaded,
       }
     )),
@@ -25,6 +26,7 @@ export const detailedCityInfo = createSelector(
       name: city.name,
       temp: city.main.temp,
       wind: city.wind.speed,
+      icon: city.weather[0].icon,
       loaded: city.loaded,
     }
   )),
@@ -40,6 +42,7 @@ export const getLocalCity = createSelector(
         name: city.name,
         temp: city.main.temp,
         wind: city.wind.speed,
+        icon: city.weather[0].icon,
         loaded: city.loaded,
       }
     )),

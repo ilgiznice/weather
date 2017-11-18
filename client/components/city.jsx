@@ -6,7 +6,7 @@ import { remove, refresh } from '../states/cities'
 import '../../styles/city.scss'
 import Loader from './loader.jsx'
 
-const City = ({ city: { id, name, temp, wind, loaded }, my_city, remove, refresh }) => {
+const City = ({ city: { id, name, temp, wind, icon, loaded }, my_city, remove, refresh }) => {
   if (!loaded) return <Loader />
   return (
     <div className="row city">
@@ -17,8 +17,15 @@ const City = ({ city: { id, name, temp, wind, loaded }, my_city, remove, refresh
       )}
       <div className="col-md-8">
         <div className="name">{name}</div>
-        <div className="temp">{temp} °C</div>
-        <div className="wind">{wind} м/с</div>
+        <div className="row">
+          <div className="col-sm-2">
+            <img src={`http://openweathermap.org/img/w/${icon}.png`} alt="Погода" />
+          </div>
+          <div className="col-sm-10">
+            <div className="temp">{temp} °C</div>
+            <div className="wind">{wind} м/с</div>
+          </div>
+        </div>
       </div>
       <div className="col-md-4">
         <div
