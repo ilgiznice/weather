@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { remove, refresh } from '../states/cities'
 
@@ -16,7 +17,11 @@ const City = ({ city: { id, name, temp, wind, icon, loaded }, my_city, remove, r
         </div>
       )}
       <div className="col-md-8">
-        <div className="name">{name}</div>
+        <div className="name">
+          <Link href={`/city/${id}`} to={`/city/${id}`}>
+            {name}
+          </Link>
+        </div>
         <div className="row">
           <div className="col-sm-2">
             <img src={`http://openweathermap.org/img/w/${icon}.png`} alt="Погода" />

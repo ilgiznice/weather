@@ -1,20 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Detailed from '../components/detailed.jsx'
 
-export default class extends Component {
-  constructor() {
-    super()
-    this.state = {
-      id: null,
-    }
-  }
-  componentDidMount() {
-    // Получение ID города из URL
-  }
-  render() {
-    return (
-      <Detailed id={this.state.id} />
-    )
-  }
-}
+export default ({ match: { params: { id } } }) => (
+  <Detailed id={id} />
+)
