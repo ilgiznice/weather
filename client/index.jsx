@@ -29,7 +29,6 @@ state.cities.selected_cities = initial_state
 
 store.subscribe(() => {
   setStorage(store.getState())
-  console.log(store.getState())
 })
 
 getLocation(store, state)
