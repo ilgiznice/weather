@@ -7,3 +7,8 @@ export const getStorage = () => {
 export const setStorage = (state) => {
   localStorage.setItem('initial_state', JSON.stringify(state.cities.selected_cities))
 }
+
+export const clearStorage = () => {
+  localStorage.removeItem('initial_state')
+  window.location.reload()
+}

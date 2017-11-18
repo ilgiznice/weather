@@ -35,6 +35,13 @@ export const refresh = {
   failure: createAction('Произошла ошибка при получении данных'),
 }
 
+//  Обновление информации о всех городах
+export const refreshAll = {
+  pending: createAction('Запрос на получение актуальных данных'),
+  success: createAction('Актуальная информация была получена'),
+  failure: createAction('Произошла ошибка при получении данных'),
+}
+
 /**
  * Default state
  */
@@ -153,6 +160,34 @@ const refresh_failure_handler = (state, payload) => (
   }
 )
 
+//  RefreshAll handlers
+
+const refreshAll_pending_handler = state => (
+  {
+    ...state,
+    selected_cities: state.selected_cities.map(city => (
+      { ...city, loaded: false }
+    )),
+  }
+)
+
+const refreshAll_success_handler = (state, payload) => (
+  {
+    ...state,
+    selected_cities: state.selected_cities.map((city) => {
+      const _city = payload.list.filter(data => data.id === city.id)[0]
+      return { ...city, ..._city, loaded: true }
+    }),
+  }
+)
+
+const refreshAll_failure_handler = (state, payload) => (
+  {
+    ...state,
+    err: [...state.err, payload],
+  }
+)
+
 const reducer = createReducer({
   [search.pending]: search_pending_handler,
   [search.success]: search_success_handler,
@@ -166,6 +201,9 @@ const reducer = createReducer({
   [refresh.pending]: refresh_pending_handler,
   [refresh.success]: refresh_success_handler,
   [refresh.failure]: refresh_failure_handler,
+  [refreshAll.pending]: refreshAll_pending_handler,
+  [refreshAll.success]: refreshAll_success_handler,
+  [refreshAll.failure]: refreshAll_failure_handler,
 }, default_state)
 
 export default reducer

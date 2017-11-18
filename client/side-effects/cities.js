@@ -1,7 +1,7 @@
 import request from 'superagent'
 import { takeLatest, takeEvery } from 'redux-saga'
 import { call, put } from 'redux-saga/effects'
-import { search, add, find, refresh } from '../states/cities'
+import { search, add, find, refresh, refreshAll } from '../states/cities'
 
 const app_id = 'addd9b7c638d19282e10c7590c0147e9'
 
@@ -51,16 +51,21 @@ const findCity = (lat, lon, accuracy) => (
   })
 )
 
-// const getCities = ids => (
-//   new Promise((resolve, reject) => {
-//     const imploded_ids = ids.join(',')
-//     const url = `http://api.openweathermap.org/data/2.5/group?id=${imploded_ids}&units=metric`
-//     request.get(url).end((err, res) => {
-//       if (err) return reject(err)
-//       return resolve(res)
-//     })
-//   })
-// )
+/**
+ * Bulk-запрос на получение информации по городам
+ * @param {Array} ids
+ */
+
+const getCities = ids => (
+  new Promise((resolve, reject) => {
+    const imploded_ids = ids.join(',')
+    const url = `http://api.openweathermap.org/data/2.5/group?id=${imploded_ids}&appid=${app_id}&units=metric`
+    request.get(url).end((err, res) => {
+      if (err) return reject(err)
+      return resolve(res)
+    })
+  })
+)
 
 //  Generators
 
@@ -104,14 +109,14 @@ function* actionRefreshCity(action) {
   }
 }
 
-// function* actionGetCities(action) {
-//   try {
-//     const user = yield call(API.register, { form: action.form })
-//     yield put(register.registerSuccess({ user }))
-//   } catch (err) {
-//     yield put(register.registerFailure({ err }))
-//   }
-// }
+function* actionRefreshAll(action) {
+  try {
+    const cities = yield call(getCities, action.payload.ids)
+    yield put(refreshAll.success(cities.body))
+  } catch (err) {
+    yield put(refreshAll.failure(err))
+  }
+}
 
 //  Watchers
 
@@ -131,9 +136,14 @@ function* watchRefreshCity() {
   yield* takeEvery(refresh.pending.getType(), actionRefreshCity)
 }
 
+function* watchRefreshAll() {
+  yield* takeLatest(refreshAll.pending.getType(), actionRefreshAll)
+}
+
 export default [
   watchSearchCity,
   watchGetCity,
   watchFindCity,
   watchRefreshCity,
+  watchRefreshAll,
 ]

@@ -44,3 +44,8 @@ export const getLocalCity = createSelector(
       }
     )),
 )
+
+export const getCityIds = createSelector(
+  getCities,
+  cities => cities.map(city => city.id),
+)
